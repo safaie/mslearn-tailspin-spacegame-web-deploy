@@ -132,5 +132,18 @@ stages:
             displayName: 'Azure App Service Deploy: website'
             inputs:
               azureSubscription: 'Tailspin - Service Principal'
+              deployToSlotOrASE: 'true'
+              resourceGroupName: 'alius-probatio-rg'
+              slotName: 'swap'
               appName: '$(WebAppNameStaging)'
               package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
+          - task: AzureAppServiceManage@0
+            displayName: 'Swap deployment slots'
+            inputs:
+              azureSubscription: 'Tailspin - Service Principal'
+              resourceGroupName: 'alius-probatio-rg'
+              webAppName: '$(WebAppNameStaging)'
+              sourceSlot: 'swap'
+              targetSlot: 'production'
+              action: 'Swap Slots'
+
