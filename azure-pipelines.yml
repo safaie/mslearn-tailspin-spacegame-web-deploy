@@ -13,7 +13,7 @@ stages:
     pool:
       vmImage: 'ubuntu-18.04'
       demands:
-      - npm
+      - npm -equals 14.18.1
 
     variables:
       wwwrootDir: 'Tailspin.SpaceGame.Web/wwwroot'
